@@ -23,8 +23,8 @@ Este repositório tem como finalidade:
 ---
 
 ## 🛠️ Tecnologias Utilizadas
-- [Laravel 10.x](https://laravel.com/)
-- PHP 8.x
+- [Laravel 12.30.1](https://laravel.com/)
+- PHP 8.3.6
 - MySQL
 - Composer
 - Artisan CLI
