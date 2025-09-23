@@ -35,7 +35,7 @@ Este repositório tem como finalidade:
 ## 👨‍💻 Autor
 **Jean Lucas de Lima Cruz**  
 📧 [jeanlucas091410@gmail.com](mailto:jeanlucas091410@gmail.com)  
-🔗 [LinkedIn](https://linkedin.com/in/jean-lucas-de-lima-cruz)  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jean%20Lucas-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jean-lucas-de-lima-cruz-19718b208) 
 
 ---
 
