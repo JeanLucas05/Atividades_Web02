@@ -8,7 +8,8 @@ Aqui você encontrará implementações práticas de conceitos como **migrations
 ## 📂 Estrutura do Repositório
 - **atividade01/** → Migrations no Laravel  
   (README detalhado dentro da pasta explicando a atividade)
-- **atividade02/** → *(em breve)*  
+- **CRUD_CARROS/** → Criar um CRUD em Laravel para cadastro de carros.
+- (README detalhado dentro da pasta explicando a atividade) 
 - **atividade03/** → *(em breve)*  
 
 ---
