@@ -50,7 +50,7 @@ Este projeto implementa um CRUD completo para gerenciamento de carros utilizando
 ## 👨‍💻 Autor
 
 **Jean Lucas**  
-[Seu Email](mailto:jeanlucas091410@gmail.com)
+[jeanlucas091410@gmail.com](mailto:jeanlucas091410@gmail.com)
 
 ---
 
