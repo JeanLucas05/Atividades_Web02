@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Author extends Model
 {
-    protected $table = 'authors';
     use HasFactory;
-    protected $fileable = ['name', 'email','birth_date'];
-    public function books (){
+
+    protected $table = 'authors';
+
+    protected $fillable = ['name', 'email', 'birth_date'];
+
+    public function books()
+    {
         return $this->hasMany(Book::class);
     }
 }

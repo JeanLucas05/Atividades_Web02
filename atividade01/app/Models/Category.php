@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-   
     use HasFactory;
 
-    protected $fileable = ['name'];
-    public function books (){
+    protected $fillable = ['name'];
+
+    public function books()
+    {
         return $this->hasMany(Book::class);
     }
 }

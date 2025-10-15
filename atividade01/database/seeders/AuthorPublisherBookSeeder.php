@@ -30,3 +30,4 @@ class AuthorPublisherBookSeeder extends Seeder
         });
     }
 }
+     
