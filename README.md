@@ -92,7 +92,7 @@ Este repositório tem como principais finalidades:
 ## 👨‍💻 Autor
 
 **Jean Lucas de Lima Cruz**
-
----
+[![Email](https://img.shields.io/badge/Email-jeanlucas091410%40gmail.com-red?logo=gmail&logoColor=white)](mailto:jeanlucas091410@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jean%20Lucas-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeanlucasdelimacruz/)
 
 ⭐ **Se este repositório foi útil para você, não esqueça de deixar uma star!**
