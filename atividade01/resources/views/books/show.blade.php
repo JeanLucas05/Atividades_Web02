@@ -24,6 +24,8 @@
                     {{ $book->category->name }}
                 </a>
             </p>
+
+            <strong>Ano de Publicacao:</strong> {{ $book->published_year }}
         </div>
     </div>
 

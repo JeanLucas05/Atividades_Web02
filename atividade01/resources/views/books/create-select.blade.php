@@ -61,6 +61,22 @@
             @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="published_year" class="form-label">Ano de Publicação</label>
+            <input type="number"
+                class="form-control @error('published_year') is-invalid @enderror"
+                id="published_year"
+                name="published_year"
+                min="1000"
+                max="{{ date('Y') }}"
+                required>
+            @error('published_year')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
         <button type="submit" class="btn btn-success">Salvar</button>
     </form>
 </div>

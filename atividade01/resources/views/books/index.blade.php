@@ -23,6 +23,7 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Autor</th>
+                <th>Ano de Publicação</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                     <td>{{ $book->id }}</td>
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author->name }}</td>
+                    <td>{{ $book->published_year }}</td>
                     <td>
                         <!-- Botão de Visualizar -->
                         <a href="{{ route('books.show', $book->id) }}" class="btn btn-info btn-sm">
@@ -55,7 +57,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">Nenhum livro encontrado.</td>
+                    <td colspan="5">Nenhum livro encontrado.</td>
                 </tr>
             @endforelse
         </tbody>
