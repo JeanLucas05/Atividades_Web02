@@ -1,4 +1,4 @@
- 🚀 Atividades – Disciplina Web 2 (Laravel)
+# 🚀 Atividades – Disciplina Web 2 (Laravel)
 
 Bem-vindo ao repositório das minhas atividades da disciplina **Web 2**, onde estudamos o framework Laravel e suas principais funcionalidades.  
 Aqui você encontrará implementações práticas de conceitos como *migrations*, *rotas*, *controllers*, **Eloquent ORM**, relacionamentos e muito mais.
@@ -21,6 +21,40 @@ Implementação de um sistema completo de gerenciamento de biblioteca.
 - **Eloquent ORM:** Consultas complexas e operações avançadas
 - **Views Blade:** Interface completa com layout unificado
 
+#### 🗂️ Estrutura de Pastas
+
+```
+atividade01/
+├── app/
+│   ├── Models/
+│   │   ├── Author.php
+│   │   ├── Book.php
+│   │   ├── Category.php
+│   │   ├── Publisher.php
+│   │   └── User.php
+│   ├── Http/
+│   │   └── Controllers/
+│   │       ├── AuthorController.php
+│   │       ├── BookController.php
+│   │       ├── CategoryController.php
+│   │       ├── PublisherController.php
+│   │       └── UserController.php
+│   └── Providers/
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+├── resources/
+│   └── views/
+│       ├── authors/
+│       ├── books/
+│       ├── categories/
+│       ├── publishers/
+│       └── users/
+├── routes/
+│   └── web.php
+```
+
 ---
 
 ### 🚗 CRUD_CARROS – Sistema de Gerenciamento de Veículos
@@ -36,6 +70,25 @@ Sistema completo para cadastro e gestão de automóveis.
 - **Views Especializadas:** Interfaces para cadastro e listagem
 - **Validações:** Regras de negócio para os dados dos carros
 
+#### 🗂️ Estrutura de Pastas
+
+```
+CRUD_CARROS/
+├── app/
+│   ├── Models/
+│   │   └── Car.php
+│   ├── Http/
+│   │   └── Controllers/
+│   │       └── CarController.php
+├── database/
+│   └── migrations/
+├── resources/
+│   └── views/
+│       └── cars/
+├── routes/
+│   └── web.php
+```
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
@@ -48,32 +101,6 @@ Sistema completo para cadastro e gestão de automóveis.
 - **Bootstrap**
 - **Composer**
 - **Artisan CLI**
-
----
-
-## 📁 Estrutura de Diretórios
-
-```
-📦 Repositório Web 2
-├── 📁 atividade01/                # Sistema de Biblioteca
-│   ├── app/
-│   │   ├── Models/
-│   │   ├── Http/Controllers/
-│   │   └── Providers/
-│   ├── database/
-│   │   ├── migrations/
-│   │   ├── seeders/
-│   │   └── factories/
-│   ├── resources/views/
-│   └── routes/
-│
-└── 📁 CRUD_CARROS/                # Sistema de Veículos
-    ├── app/Models/Car.php
-    ├── database/migrations/
-    ├── app/Http/Controllers/CarController.php
-    ├── resources/views/cars/
-    └── routes/web.php
-```
 
 ---
 
@@ -91,8 +118,8 @@ Este repositório tem como principais finalidades:
 
 ## 👨‍💻 Autor
 
-**Jean Lucas de Lima Cruz**
-[![Email](https://img.shields.io/badge/Email-jeanlucas091410%40gmail.com-red?logo=gmail&logoColor=white)](mailto:jeanlucas091410@gmail.com)
+**Jean Lucas de Lima Cruz**  
+[![Email](https://img.shields.io/badge/Email-jeanlucas091410%40gmail.com-red?logo=gmail&logoColor=white)](mailto:jeanlucas091410@gmail.com)  
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Jean%20Lucas-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeanlucasdelimacruz/)
 
 ⭐ **Se este repositório foi útil para você, não esqueça de deixar uma star!**
