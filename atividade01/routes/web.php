@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 
 
 Route::resource('categories',CategoryController::class);
@@ -24,3 +25,8 @@ Route::resource('books', BookController::class)->except(['create', 'store']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+Route::resource('users', UserController::class)->except(['create', 'store', 'destroy']);
