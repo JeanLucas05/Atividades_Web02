@@ -7,6 +7,7 @@ use App\Models\Publisher;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class BookController extends Controller
 {
@@ -59,8 +60,13 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-        $book->load(['publisher', 'author', 'category']);
-        return view('books.show', compact('book'));
+        // Carregando autor, editora e categoria do livro com eager loading
+    $book->load(['author', 'publisher', 'category']);
+
+    // Carregar todos os usuários para o formulário de empréstimo
+    $users = User::all();
+
+    return view('books.show', compact('book','users'));
     }
 
     public function edit(Book $book)
