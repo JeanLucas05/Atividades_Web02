@@ -69,7 +69,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="published_year" class="form-label">Título</label>
+            <label for="published_year" class="form-label">Ano de Publicação</label>
             <input type="number" class="form-control @error('published_year') is-invalid @enderror" id="published_year" name="published_year" value="{{ old('published_year', $book->published_year) }}" required>
             @error('published_year')
                 <div class="invalid-feedback">

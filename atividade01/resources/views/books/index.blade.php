@@ -50,7 +50,7 @@
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir este livro?')">
-                                <i class="bi bi-trash"></i> Deletar
+                                <i class="bi bi-trash"></i> Excluir
                             </button>
                         </form>
                     </td>

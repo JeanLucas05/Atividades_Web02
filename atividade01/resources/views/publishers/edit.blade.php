@@ -23,7 +23,7 @@
             @enderror
 
             <!-- Email -->
-            <label for="address" class="form-label">Email</label>
+            <label for="address" class="form-label">Endereço</label>
             <input 
                 type="address" 
                 class="form-control @error('address') is-invalid @enderror" 

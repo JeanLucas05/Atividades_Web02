@@ -17,7 +17,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Endereço</th>
                 <th>Ações</th>
