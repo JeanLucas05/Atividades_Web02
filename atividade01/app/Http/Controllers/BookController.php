@@ -6,8 +6,9 @@ use App\Models\Book;
 use App\Models\Publisher;
 use App\Models\Author;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;   
 
 class BookController extends Controller
 {
@@ -30,9 +31,15 @@ class BookController extends Controller
             'author_id' => 'required|exists:authors,id',
             'category_id' => 'required|exists:categories,id',
             'published_year' => 'required|integer|min:1000|max:' . date('Y'),
+            'cover' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
+        if ($request->hasFile('cover')) {
+            $validateData['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
         Book::create($validateData);
+
         return redirect()->route('books.index')->with('success', 'Livro criado com sucesso.');
     }
 
@@ -52,21 +59,24 @@ class BookController extends Controller
             'author_id' => 'required|exists:authors,id',
             'category_id' => 'required|exists:categories,id',
             'published_year' => 'required|integer|min:1000|max:' . date('Y'),
+            'cover' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
+        if ($request->hasFile('cover')) {
+            $validateData['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
         Book::create($validateData);
+
         return redirect()->route('books.index')->with('success', 'Livro criado com sucesso.');
     }
 
     public function show(Book $book)
     {
-        // Carregando autor, editora e categoria do livro com eager loading
-    $book->load(['author', 'publisher', 'category']);
+        $book->load(['author', 'publisher', 'category']);
+        $users = User::all();
 
-    // Carregar todos os usuários para o formulário de empréstimo
-    $users = User::all();
-
-    return view('books.show', compact('book','users'));
+        return view('books.show', compact('book', 'users'));
     }
 
     public function edit(Book $book)
@@ -74,7 +84,7 @@ class BookController extends Controller
         $publishers = Publisher::all();
         $authors = Author::all();
         $categories = Category::all();
-        
+
         return view('books.edit', compact('book', 'publishers', 'authors', 'categories'));
     }
 
@@ -86,15 +96,32 @@ class BookController extends Controller
             'author_id' => 'required|exists:authors,id',
             'category_id' => 'required|exists:categories,id',
             'published_year' => 'required|integer|min:1000|max:' . date('Y'),
+            'cover' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ]);
 
+        // Se tiver nova capa, remove a antiga
+        if ($request->hasFile('cover')) {
+            if ($book->cover && Storage::disk('public')->exists($book->cover)) {
+                Storage::disk('public')->delete($book->cover);
+            }
+
+            $validateData['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
         $book->update($validateData);
+
         return redirect()->route('books.index')->with('success', 'Livro atualizado com sucesso.');
     }
 
     public function destroy(Book $book)
     {
+    
+        if ($book->cover && Storage::disk('public')->exists($book->cover)) {
+            Storage::disk('public')->delete($book->cover);
+        }
+
         $book->delete();
+
         return redirect()->route('books.index')->with('success', 'Livro deletado com sucesso.');
     }
 }

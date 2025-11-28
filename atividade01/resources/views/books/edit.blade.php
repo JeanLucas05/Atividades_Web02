@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="my-4">Editar Livro</h1>
 
-    <form action="{{ route('books.update', $book) }}" method="POST">
+    <form action="{{ route('books.update', $book) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -76,7 +76,17 @@
                     {{ $message }}
                 </div>
             @enderror
-</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="cover" class="form-label">Capa</label>
+            <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover" name="cover" value="{{ old('cover', $book->cover) }}" required>
+            @error('cover')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
 
         <button type="submit" class="btn btn-success">Atualizar</button>
         <a href="{{ route('books.index') }}" class="btn btn-secondary">Cancelar</a>

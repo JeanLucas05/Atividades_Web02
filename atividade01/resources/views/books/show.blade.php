@@ -26,6 +26,17 @@
                 </a>
             </p>
             <p><strong>Ano de Publicação:</strong> {{ $book->published_year }}</p>
+
+            
+            @if($book->cover)
+                <div class="mt-4">
+                    <p><strong>Capa</strong></p>
+                    <img src="{{ asset('storage/' . $book->cover) }}"
+                         alt="Capa do Livro"
+                         class="img-thumbnail"
+                         style="width: 250px; height: auto;">
+                </div>
+            @endif
         </div>
     </div>
 
@@ -48,6 +59,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <button type="submit" class="btn btn-success">Registrar Empréstimo</button>
             </form>
         </div>
@@ -95,6 +107,5 @@
             @endif
         </div>
     </div>
-
 </div>
 @endsection

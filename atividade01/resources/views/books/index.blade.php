@@ -24,6 +24,7 @@
                 <th>Título</th>
                 <th>Autor</th>
                 <th>Ano de Publicação</th>
+                <th>Capa</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -34,19 +35,31 @@
                     <td>{{ $book->title }}</td>
                     <td>{{ $book->author->name }}</td>
                     <td>{{ $book->published_year }}</td>
+
+                    <!-- COLUNA DA CAPA (CORRETA) -->
                     <td>
-                        <!-- Botão de Visualizar -->
+                        @if($book->cover)
+                            <img src="{{ asset('storage/' . $book->cover) }}"
+                                 alt="Capa"
+                                 style="width: 60px; height: auto; border-radius: 4px;">
+                        @else
+                            <span class="text-muted">Sem capa</span>
+                        @endif
+                    </td>
+
+                    <!-- AÇÕES -->
+                    <td>
                         <a href="{{ route('books.show', $book->id) }}" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i> Visualizar
                         </a>
 
-                        <!-- Botão de Editar -->
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary btn-sm">
                             <i class="bi bi-pencil"></i> Editar
                         </a>
 
-                        <!-- Botão de Deletar -->
-                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display: inline;">
+                        <form action="{{ route('books.destroy', $book->id) }}" 
+                              method="POST" 
+                              style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir este livro?')">
@@ -57,13 +70,12 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">Nenhum livro encontrado.</td>
+                    <td colspan="6">Nenhum livro encontrado.</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
 
-    <!-- Controles de Paginação -->
     <div class="d-flex justify-content-center">
         {{ $books->links() }}
     </div>
