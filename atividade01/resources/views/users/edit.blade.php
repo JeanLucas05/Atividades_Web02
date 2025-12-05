@@ -10,15 +10,43 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                name="name" 
+                value="{{ old('name', $user->name) }}" 
+                required
+            >
         </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+            <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                name="email" 
+                value="{{ old('email', $user->email) }}" 
+                required
+            >
         </div>
 
-        <button type="submit" class="btn btn-success">Salvar</button>
+        @can('updateRole', $user)
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select name="role" id="role" class="form-control">
+                    <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>Usuário</option>
+                    <option value="bibliotecario" {{ $user->role === 'bibliotecario' ? 'selected' : '' }}>bibliotecario</option>
+                    <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Administrador</option>
+                </select>
+            </div>
+        @endcan
+
+        @can('update', $user)
+            <button type="submit" class="btn btn-success">Salvar</button>
+        @endcan
+
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>

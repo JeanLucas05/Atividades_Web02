@@ -4,12 +4,16 @@
 <div class="container">
     <h1 class="my-4">Editar Categoria</h1>
 
+    @can('update', $category)
     <form action="{{ route('categories.update', $category) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $category->name) }}" required>
+            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                   id="name" name="name"
+                   value="{{ old('name', $category->name) }}" required>
+
             @error('name')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -24,5 +28,14 @@
             <i class="bi bi-arrow-left"></i> Voltar
         </a>
     </form>
+    @else
+        <div class="alert alert-danger">
+            Você não tem permissão para editar categorias.
+        </div>
+
+        <a href="{{ route('categories.index') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    @endcan
 </div>
 @endsection

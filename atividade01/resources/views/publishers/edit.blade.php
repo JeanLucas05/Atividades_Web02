@@ -4,6 +4,7 @@
 <div class="container">
     <h1 class="my-4">Editar Editora</h1>
 
+    @can('update', $publisher)
     <form action="{{ route('publishers.update', $publisher) }}" method="POST">
         @csrf
         @method('PUT')
@@ -46,5 +47,6 @@
             <i class="bi bi-arrow-left"></i> Voltar
         </a>
     </form>
+    @endcan
 </div>
 @endsection

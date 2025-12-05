@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="my-4">Adicionar Authors</h1>
+    @can('create', App\Models\Publisher::class)
 
     <form action="{{ route('publishers.store') }}" method="POST">
         @csrf
@@ -44,5 +45,6 @@
             <i class="bi bi-arrow-left"></i> Voltar
         </a>
     </form>
+    @endcan
 </div>
 @endsection

@@ -14,17 +14,20 @@ class BookController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Book::class);
         $books = Book::with('author')->paginate(20);
         return view('books.index', compact('books'));
     }
 
     public function createWithId()
     {
+        $this->authorize('create', Book::class);
         return view('books.create-id');
     }
 
     public function storeWithId(Request $request)
     {
+        $this->authorize('create', Book::class);
         $validateData = $request->validate([
             'title' => 'required|string|max:255',
             'publisher_id' => 'required|exists:publishers,id',
@@ -45,6 +48,7 @@ class BookController extends Controller
 
     public function createWithSelect()
     {
+        $this->authorize('create', Book::class);
         $publishers = Publisher::all();
         $authors = Author::all();
         $categories = Category::all();
@@ -53,6 +57,7 @@ class BookController extends Controller
 
     public function storeWithSelect(Request $request)
     {
+        $this->authorize('create', Book::class);
         $validateData = $request->validate([
             'title' => 'required|string|max:255',
             'publisher_id' => 'required|exists:publishers,id',
@@ -73,6 +78,7 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
+        $this->authorize('view', $book);
         $book->load(['author', 'publisher', 'category']);
         $users = User::all();
 
@@ -81,6 +87,7 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
+        $this->authorize('update', $book);
         $publishers = Publisher::all();
         $authors = Author::all();
         $categories = Category::all();
@@ -90,6 +97,7 @@ class BookController extends Controller
 
     public function update(Request $request, Book $book)
     {
+        $this->authorize('update', $book);
         $validateData = $request->validate([
             'title' => 'required|string|max:255',
             'publisher_id' => 'required|exists:publishers,id',
@@ -115,6 +123,7 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        $this->authorize('delete', $book);
     
         if ($book->cover && Storage::disk('public')->exists($book->cover)) {
             Storage::disk('public')->delete($book->cover);

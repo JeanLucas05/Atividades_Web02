@@ -4,6 +4,8 @@
 <div class="container">
     <h1 class="my-4">Adicionar Categoria</h1>
 
+
+    @can('create', App\Models\Category::class)
     <form action="{{ route('categories.store') }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -30,5 +32,6 @@
             <i class="bi bi-arrow-left"></i> Voltar
         </a>
     </form>
+    @endcan
 </div>
 @endsection

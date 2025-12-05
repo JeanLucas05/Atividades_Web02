@@ -9,6 +9,7 @@
             {{ session('success') }}
         </div>
     @endif
+    @can('create', App\Models\Book::class)
 
     <a href="{{ route('books.create.id') }}" class="btn btn-success mb-3">
         <i class="bi bi-plus"></i> Adicionar Livro (Com ID)
@@ -16,6 +17,7 @@
     <a href="{{ route('books.create.select') }}" class="btn btn-primary mb-3">
         <i class="bi bi-plus"></i> Adicionar Livro (Com Select)
     </a>
+    @endcan
 
     <table class="table table-striped">
         <thead>
@@ -49,14 +51,18 @@
 
                     <!-- AÇÕES -->
                     <td>
+                        @can('view', $book)
                         <a href="{{ route('books.show', $book->id) }}" class="btn btn-info btn-sm">
                             <i class="bi bi-eye"></i> Visualizar
                         </a>
+                        @endcan
 
+                        @can('update', $book)
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-primary btn-sm">
                             <i class="bi bi-pencil"></i> Editar
                         </a>
-
+                        @endcan
+                        @can('delete', $book)
                         <form action="{{ route('books.destroy', $book->id) }}" 
                               method="POST" 
                               style="display: inline;">
@@ -66,6 +72,7 @@
                                 <i class="bi bi-trash"></i> Excluir
                             </button>
                         </form>
+                        @endcan
                     </td>
                 </tr>
             @empty

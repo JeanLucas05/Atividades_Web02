@@ -10,6 +10,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -19,13 +20,30 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+
                     <td>
-                        <a href="{{ route('users.show', $user) }}" class="btn btn-info btn-sm">
-                            <i class="bi bi-eye"></i> Visualizar
-                        </a>
-                        <a href="{{ route('users.edit', $user) }}" class="btn btn-primary btn-sm">
-                            <i class="bi bi-pencil"></i> Editar
-                        </a>
+                        <span class="badge 
+                            @if($user->role === 'admin') bg-danger
+                            @elseif($user->role === 'editor') bg-warning text-dark
+                            @else bg-secondary
+                            @endif
+                        ">
+                            {{ ucfirst($user->role) }}
+                        </span>
+                    </td>
+
+                    <td>
+                        @can('view', $user)
+                            <a href="{{ route('users.show', $user) }}" class="btn btn-info btn-sm">
+                                <i class="bi bi-eye"></i> Visualizar
+                            </a>
+                        @endcan
+
+                        @can('update', $user)
+                            <a href="{{ route('users.edit', $user) }}" class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

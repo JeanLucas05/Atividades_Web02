@@ -4,6 +4,7 @@
 <div class="container">
     <h1 class="my-4">Detalhes da Categoria</h1>
 
+    @can('view', $category)
     <div class="card">
         <div class="card-header">
             Categoria: {{ $category->name }}
@@ -18,4 +19,5 @@
         <i class="bi bi-arrow-left"></i> Voltar
     </a>
 </div>
+@endcan
 @endsection

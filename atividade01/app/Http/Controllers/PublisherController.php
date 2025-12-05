@@ -11,6 +11,7 @@ class PublisherController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Publisher::class);
         $publishers = Publisher::all();
         return view('publishers.index' , compact('publishers'));
     }
@@ -20,6 +21,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Publisher::class);
         return view('publishers.create');
     }
 
@@ -29,6 +31,7 @@ class PublisherController extends Controller
     public function store(Request $request)
     {
         //
+        $this->authorize('create', Publisher::class);
         $validateData = $request->validate([
             'name'=> 'required|string|max:255',
             'address' => 'required|string|max:255|min:5'
@@ -44,6 +47,7 @@ class PublisherController extends Controller
      */
     public function show(Publisher $publisher)
     {
+        $this->authorize('view', $publisher);
         return view('publishers.show' , compact('publisher'));
     }
 
@@ -52,6 +56,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
+        $this->authorize('update', $publisher);
         return view('publishers.edit' , compact('publisher'));
     }
 
@@ -60,6 +65,7 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher  $publisher)
     {
+         $this->authorize('update', $publisher);
         $validateData = $request->validate([
             'name'=> 'required|string|max:255',
             'address' => 'required|string|max:255|min:5'
@@ -74,6 +80,7 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
+        $this->authorize('delete', $publisher);
         $publisher->delete();
         return redirect()->route('publishers.index')->with('success', 'Editora apagada com sucesso.');
     }

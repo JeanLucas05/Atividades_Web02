@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="my-4">Adicionar Livro (Com ID)</h1>
-
+    @can('create', App\Models\Book::class)
     <form action="{{ route('books.store.id') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -63,5 +63,6 @@
 
         <button type="submit" class="btn btn-success">Salvar</button>
     </form>
+    @endcan
 </div>
 @endsection

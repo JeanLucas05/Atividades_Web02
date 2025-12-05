@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,57 +12,47 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = \App\Models\User::paginate(10);
+        // Só ADMIN pode ver a lista de usuários
+        $this->authorize('viewAny', User::class);
+
+        $users = User::paginate(10);
         return view('users.index', compact('users'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(\App\Models\User $user)
+    public function show(User $user)
     {
-        return view ('users.show' , compact('user'));
+        // Admin pode ver qualquer usuário
+        // Bibliotecário pode ver apenas se quiser permitir
+        $this->authorize('view', $user);
+
+        return view('users.show' , compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(\App\Models\User $user)
+    public function edit(User $user)
     {
+        // Apenas ADMIN pode alterar papel dos usuários
+        $this->authorize('update', $user);
+
         return view('users.edit' , compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, \App\Models\User $user)
+    public function update(Request $request, User $user)
     {
-        $user->update($request->only('name', 'email'));
+        $this->authorize('update', $user);
 
-        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso.');
-    }
+        $user->update($request->only('name', 'email', 'role'));
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'Usuário atualizado com sucesso.');
     }
 }

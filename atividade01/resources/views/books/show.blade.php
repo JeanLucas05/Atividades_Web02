@@ -27,7 +27,6 @@
             </p>
             <p><strong>Ano de Publicação:</strong> {{ $book->published_year }}</p>
 
-            
             @if($book->cover)
                 <div class="mt-4">
                     <p><strong>Capa</strong></p>
@@ -45,6 +44,7 @@
     </a>
 
     {{-- Registrar Empréstimo --}}
+    @can('borrow', $book)
     <div class="card mb-4">
         <div class="card-header">Registrar Empréstimo</div>
         <div class="card-body">
@@ -64,6 +64,7 @@
             </form>
         </div>
     </div>
+    @endcan
 
     {{-- Histórico de Empréstimos --}}
     <div class="card">
@@ -93,11 +94,13 @@
                             <td>{{ $user->pivot->returned_at ?? 'Em Aberto' }}</td>
                             <td>
                                 @if(is_null($user->pivot->returned_at))
+                                    @can('return', $book)
                                     <form action="{{ route('borrowings.return', $user->pivot->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <button class="btn btn-warning btn-sm">Devolver</button>
                                     </form>
+                                    @endcan
                                 @endif
                             </td>
                         </tr>
