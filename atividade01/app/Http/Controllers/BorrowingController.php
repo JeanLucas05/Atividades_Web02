@@ -41,6 +41,13 @@ class BorrowingController extends Controller
        return redirect()->route('books.show', $book)->with('Error', 'Este livro já está emprestado e ainda não foi devolvido.');
     }
 
+    $activeborrowings = Borrowing::where('user_id',$request->user_id)
+    -> whereNull('Returned_at')
+    -> count();
+    if ($activeborrowings >= 5){
+        return redirect()->route('books.show', $book)->with('Error', 'Este usuário já possui o limite de 5 empréstimos ativos.');
+    }
+
 
     Borrowing::create([
         'user_id' => $request->user_id,
