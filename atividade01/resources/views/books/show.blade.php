@@ -2,6 +2,20 @@
 
 @section('content')
 <div class="container">
+
+    {{-- MENSAGENS DE ERRO E SUCESSO --}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('Error'))
+        <div class="alert alert-danger">
+            {{ session('Error') }}
+        </div>
+    @endif
+
     <h1 class="my-4">Detalhes do Livro</h1>
 
     {{-- Detalhes do Livro --}}
@@ -15,16 +29,19 @@
                     {{ $book->author->name }}
                 </a>
             </p>
+
             <p><strong>Editora:</strong>
                 <a href="{{ route('publishers.show', $book->publisher->id) }}">
                     {{ $book->publisher->name }}
                 </a>
             </p>
+
             <p><strong>Categoria:</strong>
                 <a href="{{ route('categories.show', $book->category->id) }}">
                     {{ $book->category->name }}
                 </a>
             </p>
+
             <p><strong>Ano de Publicação:</strong> {{ $book->published_year }}</p>
 
             @if($book->cover)
@@ -44,7 +61,6 @@
     </a>
 
     {{-- Registrar Empréstimo --}}
-    @can('borrow', $book)
     <div class="card mb-4">
         <div class="card-header">Registrar Empréstimo</div>
         <div class="card-body">
@@ -64,7 +80,6 @@
             </form>
         </div>
     </div>
-    @endcan
 
     {{-- Histórico de Empréstimos --}}
     <div class="card">
@@ -94,13 +109,11 @@
                             <td>{{ $user->pivot->returned_at ?? 'Em Aberto' }}</td>
                             <td>
                                 @if(is_null($user->pivot->returned_at))
-                                    @can('return', $book)
                                     <form action="{{ route('borrowings.return', $user->pivot->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <button class="btn btn-warning btn-sm">Devolver</button>
                                     </form>
-                                    @endcan
                                 @endif
                             </td>
                         </tr>

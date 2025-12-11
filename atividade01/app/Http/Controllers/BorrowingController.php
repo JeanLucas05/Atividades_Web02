@@ -33,6 +33,14 @@ class BorrowingController extends Controller
         $request->validate([
         'user_id' => 'required|exists:users,id',
     ]);
+    $hasponed = Borrowing::where('book_id',$book->id)
+    -> whereNull('Returned_at')
+    -> exists();
+
+    if($hasponed){
+       return redirect()->route('books.show', $book)->with('Error', 'Este livro já está emprestado e ainda não foi devolvido.');
+    }
+
 
     Borrowing::create([
         'user_id' => $request->user_id,
@@ -42,6 +50,9 @@ class BorrowingController extends Controller
 
     return redirect()->route('books.show', $book)->with('success', 'Empréstimo registrado com sucesso.');
     }
+
+    /*Alterar a funcionalidade de empréstimo para que não seja realizado o empréstimo de um livro que tem um empréstimo em aberto.
+    Dica: verifique se existe um empréstimo com a data de retorno nula.*/
 
     public function returnBook(Borrowing $borrowing)
 {

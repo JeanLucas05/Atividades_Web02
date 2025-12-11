@@ -4,6 +4,19 @@
 <div class="container">
     <h1 class="my-4">Perfil do Usuário</h1>
 
+    {{-- Mensagens de sucesso / erro --}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if(session('Error'))
+        <div class="alert alert-danger">
+            {{ session('Error') }}
+        </div>
+    @endif
+
     {{-- Dados do Usuário --}}
     <div class="card mb-4">
         <div class="card-header">
@@ -54,17 +67,15 @@
 
                                 <td>
                                     @if(is_null($book->pivot->returned_at))
-                                        @can('return', $book)
-                                            <form action="{{ route('borrowings.return', $book->pivot->id) }}" 
-                                                  method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('PATCH')
+                                        <form action="{{ route('borrowings.return', $book->pivot->id) }}" 
+                                              method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('PATCH')
 
-                                                <button class="btn btn-warning btn-sm">
-                                                    Devolver
-                                                </button>
-                                            </form>
-                                        @endcan
+                                            <button class="btn btn-warning btn-sm">
+                                                Devolver
+                                            </button>
+                                        </form>
                                     @endif
                                 </td>
                             </tr>
