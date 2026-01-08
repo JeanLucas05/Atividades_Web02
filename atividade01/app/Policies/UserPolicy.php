@@ -45,6 +45,18 @@ class UserPolicy
     return $user->role === 'admin';
 }
 
+/**
+     * Determine whether the user can view the borrowings of another user.
+     */
+    public function viewBorrowings(User $currentUser, User $targetUser): bool
+    {
+        if ($currentUser->role === 'admin' || $currentUser->role === 'bibliotecario') {
+            return true;
+        }
+
+        return $currentUser->id === $targetUser->id;
+    }
+
     /**
      * Determine whether the user can delete the model.
      */

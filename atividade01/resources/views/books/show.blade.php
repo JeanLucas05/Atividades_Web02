@@ -59,7 +59,7 @@
     <a href="{{ route('books.index') }}" class="btn btn-secondary mb-4">
         <i class="bi bi-arrow-left"></i> Voltar
     </a>
-
+     @can('create', App\Models\Borrowing::class)
     {{-- Registrar Empréstimo --}}
     <div class="card mb-4">
         <div class="card-header">Registrar Empréstimo</div>
@@ -121,6 +121,7 @@
                     </tbody>
                 </table>
             @endif
+            @endcan
         </div>
     </div>
 </div>
