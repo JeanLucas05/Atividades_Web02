@@ -12,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Só ADMIN pode ver a lista de usuários
+        
         $this->authorize('viewAny', User::class);
 
         $users = User::paginate(10);
@@ -55,4 +55,25 @@ class UserController extends Controller
             ->route('users.index')
             ->with('success', 'Usuário atualizado com sucesso.');
     }
+
+    public function debts(Request $request , User $user)
+{
+    $this->authorize('viewDebts' , $user);
+    $users = User::where('debit', '>', 0)->get();
+
+    return view('users.debts', compact('users'));
+}
+    public function clearDebt(User $user)
+{
+    //$this->authorize('clearDebt', $user);
+    $user->update([
+        'debit' => 0
+    ]);
+
+    return redirect()
+        ->route('users.index')
+        ->with('success', 'Débito zerado com sucesso.');
+}
+
+
 }

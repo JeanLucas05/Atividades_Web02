@@ -80,4 +80,14 @@ class UserPolicy
     {
         return $user->role === 'admin';
     }
+
+    public function viewDebts(User $user)
+{
+    return $user->role === 'bibliotecario'|| 'admin';
+}
+
+public function clearDebt(User $user)
+{
+    return $user->role === 'bibliotecario' || 'admin';
+}
 }

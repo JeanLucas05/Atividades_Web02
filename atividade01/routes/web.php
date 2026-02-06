@@ -10,6 +10,15 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BorrowingController;
 
 
+ // listar usuários com débito
+    Route::get('/bibliotecario/debitos',
+        [UserController::class, 'debts']
+    )->name('bibliotecario.debitos');
+
+    // zerar multa após pagamento
+    Route::post('/bibliotecario/debitos/{user}',
+        [UserController::class, 'clearDebt']
+    )->name('bibliotecario.debitos.zerar');
 Route::resource('categories',CategoryController::class);
 Route::resource('authors',AuthorController::class);
 Route::resource('publishers',PublisherController::class);

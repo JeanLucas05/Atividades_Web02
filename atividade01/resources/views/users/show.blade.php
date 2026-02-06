@@ -4,7 +4,6 @@
 <div class="container">
     <h1 class="my-4">Perfil do Usuário</h1>
 
-    {{-- Mensagens de sucesso / erro --}}
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -22,11 +21,42 @@
         <div class="card-header">
             Informações do Usuário
         </div>
+
         <div class="card-body">
             <p><strong>ID:</strong> {{ $user->id }}</p>
             <p><strong>Nome:</strong> {{ $user->name }}</p>
             <p><strong>Email:</strong> {{ $user->email }}</p>
+
+            <p>
+                <strong>Débitos:</strong>
+
+                @if($user->debit > 0)
+                    <span class="badge bg-danger">
+                        R$ {{ number_format($user->debit, 2, ',', '.') }}
+                    </span>
+                    <span class="text-danger ms-2">
+                        Usuário bloqueado para novos empréstimos
+                    </span>
+                @else
+                    <span class="badge bg-success">Sem débitos</span>
+                @endif
+            </p>
+
             <p><strong>Papel:</strong> {{ ucfirst($user->role) }}</p>
+
+            {{-- BOTÃO APENAS PARA BIBLIOTECÁRIO --}}
+            @can('clearDebt', App\Models\User::class)
+                @if($user->debit > 0)
+                    <form action="{{ route('bibliotecario.debitos.zerar', $user) }}"
+                          method="POST">
+                        @csrf
+                        <button class="btn btn-danger btn-sm">
+                            Zerar Débito (Pagamento realizado)
+                        </button>
+                    </form>
+                @endif
+            @endcan
+
         </div>
     </div>
 
@@ -67,8 +97,8 @@
 
                                 <td>
                                     @if(is_null($book->pivot->returned_at))
-                                        <form action="{{ route('borrowings.return', $book->pivot->id) }}" 
-                                              method="POST" style="display:inline;">
+                                        <form action="{{ route('borrowings.return', $book->pivot->id) }}"
+                                              method="POST">
                                             @csrf
                                             @method('PATCH')
 
@@ -81,12 +111,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
             @endif
         </div>
     </div>
-    
 
     <a href="{{ route('users.index') }}" class="btn btn-secondary mt-3">
         Voltar

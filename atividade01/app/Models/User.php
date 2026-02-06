@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'debit'
     ];
 
     /**
@@ -44,8 +45,16 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+             'debit' => 'float', 
         ];
     }
+
+    
+        
+       
+    
+
+
 
     public function books(){
         return $this->belongsToMany(Book::class, 'borrowings')
